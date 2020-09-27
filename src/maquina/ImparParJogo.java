@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -137,6 +138,10 @@ public class ImparParJogo extends JFrame {
 	public void setEscolha(String escolha) {
 		this.escolha = escolha;
 	}
+	
+	public void icone(){
+		this.setIconImage(new ImageIcon(getClass().getResource("../imagens/download.png")).getImage());
+	}
 
 	/**
 	 * Launch the application.
@@ -158,6 +163,8 @@ public class ImparParJogo extends JFrame {
 	 * Create the frame.
 	 */
 	public ImparParJogo(String nome, Double cash, Double apostado, String escolha) {
+		
+		icone();
 		this.setNome(nome);
 		this.setCash(cash);
 		this.setApostado(apostado);

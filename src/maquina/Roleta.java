@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -24,7 +25,7 @@ public class Roleta extends JFrame {
 	
 	private String nome;
 	private Double cash;
-	private Double odd = 2.5;
+	private Double odd = 4.5;
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -56,6 +57,7 @@ public class Roleta extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		icone();
 		this.setNome(nome);
 		this.setCash(cash);
 		
@@ -79,10 +81,16 @@ public class Roleta extends JFrame {
 		
 		JRadioButton radioButton_1 = new JRadioButton("2");
 		
+		JRadioButton radioButton_2 = new JRadioButton("3");
+		
+		JRadioButton radioButton_3 = new JRadioButton("4");
+		
 		ButtonGroup grupo = new ButtonGroup();
 		grupo.add(rdbtnNewRadioButton);
 		grupo.add(radioButton);
 		grupo.add(radioButton_1);
+		grupo.add(radioButton_2);
+		grupo.add(radioButton_3);
 		
 		JLabel lblNewLabel = new JLabel("Valor da aposta:");
 		lblNewLabel.setFont(new Font("Impact", Font.PLAIN, 20));
@@ -103,6 +111,10 @@ public class Roleta extends JFrame {
 					setRadio("1");
 				}else if(radioButton_1.isSelected()) {
 					setRadio("2");
+				}else if(radioButton_2.isSelected()) {
+					setRadio("3");
+				}else if(radioButton_3.isSelected()) {
+					setRadio("4");
 				}
 				if(Double.valueOf(getTextField().getText()) <= getCash() && !getRadio().isEmpty()){
 					RoletaJogo painel = new RoletaJogo(getNome(), getCash(), radio, Double.valueOf(textField.getText()));
@@ -152,7 +164,11 @@ public class Roleta extends JFrame {
 									.addPreferredGap(ComponentPlacement.UNRELATED)
 									.addComponent(radioButton, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(radioButton_1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+									.addComponent(radioButton_1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(radioButton_2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(radioButton_3, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblValorOdd, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
 								.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,7 +191,9 @@ public class Roleta extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(rdbtnNewRadioButton)
 						.addComponent(radioButton)
-						.addComponent(radioButton_1))
+						.addComponent(radioButton_1)
+						.addComponent(radioButton_2)
+						.addComponent(radioButton_3))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -186,7 +204,7 @@ public class Roleta extends JFrame {
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnNewButton_1)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(28, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 		
@@ -232,4 +250,7 @@ public class Roleta extends JFrame {
 		this.textField = textField;
 	}
 	
+	public void icone(){
+		this.setIconImage(new ImageIcon(getClass().getResource("../imagens/download.png")).getImage());
+	}
 }

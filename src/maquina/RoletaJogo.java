@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -22,7 +23,7 @@ public class RoletaJogo extends JFrame {
 	private JPanel contentPane;
 	private String nome;
 	private Double cash;
-	private Double odd = 1.5;
+	private Double odd = 3.5;
 	private String escolha;
 	private Double apostado;
 	private int sorteado;
@@ -55,6 +56,7 @@ public class RoletaJogo extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		icone();
 		this.setNome(nome);
 		this.setCash(cash);
 		this.setEscolha(escolha);
@@ -180,7 +182,7 @@ public class RoletaJogo extends JFrame {
 	
 	public void sorteador() {
 		Random random = new Random();
-		int gerador = random.nextInt(3);
+		int gerador = random.nextInt(5);
 		this.setSorteado(gerador);
 	}
 
@@ -208,6 +210,10 @@ public class RoletaJogo extends JFrame {
 
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
+	}
+	
+	public void icone(){
+		this.setIconImage(new ImageIcon(getClass().getResource("../imagens/download.png")).getImage());
 	}
 
 }

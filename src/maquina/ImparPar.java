@@ -11,7 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -22,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JRadioButton;
 
 public class ImparPar extends JFrame {
 
@@ -29,6 +32,7 @@ public class ImparPar extends JFrame {
 	private String nome;
 	private Double cash;
 	private Double odd = 1.95;
+	private String escolha;
 
 	/**
 	 * Launch the application.
@@ -58,10 +62,9 @@ public class ImparPar extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		icone();
 		this.setNome(nome);
 		this.setCash(cash);
-		
-		JFormattedTextField escolha = new JFormattedTextField();
 		JFormattedTextField apostado = new JFormattedTextField();
 		
 		JLabel lblNome = new JLabel(this.getNome());
@@ -78,6 +81,13 @@ public class ImparPar extends JFrame {
 		JLabel escolha_1 = new JLabel("Ímpar ou Par:");
 		escolha_1.setFont(new Font("Impact", Font.PLAIN, 20));
 		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Ímpar");
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Par");
+		
+		ButtonGroup grupo = new ButtonGroup();
+		grupo.add(rdbtnNewRadioButton);
+		grupo.add(rdbtnNewRadioButton_1);
+		
 		JLabel betar = new JLabel("Valor da aposta:");
 		betar.setFont(new Font("Impact", Font.PLAIN, 20));
 		
@@ -85,8 +95,13 @@ public class ImparPar extends JFrame {
 		jogar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		jogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if((escolha.getText().toLowerCase().equals("par") || escolha.getText().toLowerCase().equals("impar") || escolha.getText().toLowerCase().equals("ímpar")) && Double.valueOf(apostado.getText()) <= getCash()) {
-					ImparParJogo ParouImpar = new ImparParJogo(getNome(), getCash(), Double.valueOf(apostado.getText()), String.valueOf(escolha.getText()));
+				if(rdbtnNewRadioButton.isSelected()) {
+					setEscolha("ímpar");
+				}else if(rdbtnNewRadioButton_1.isSelected()) {
+					setEscolha("par");
+				}
+				if((getEscolha().toLowerCase().equals("par") || getEscolha().toLowerCase().equals("ímpar")) && Double.valueOf(apostado.getText()) <= getCash()) {
+					ImparParJogo ParouImpar = new ImparParJogo(getNome(), getCash(), Double.valueOf(apostado.getText()), getEscolha());
 					if(ParouImpar.getValidarAposta().equals(true)) {
 						ParouImpar.setVisible(true);
 						setVisible(false);
@@ -110,6 +125,8 @@ public class ImparPar extends JFrame {
 				setVisible(false);
 			}
 		});
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -124,10 +141,13 @@ public class ImparPar extends JFrame {
 						.addComponent(escolha_1)
 						.addComponent(betar)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(apostado, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-								.addComponent(escolha, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jogar, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE))
+								.addComponent(jogar, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(rdbtnNewRadioButton)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(rdbtnNewRadioButton_1)))
 							.addGap(107)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
@@ -151,8 +171,9 @@ public class ImparPar extends JFrame {
 					.addComponent(escolha_1)
 					.addGap(6)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(escolha, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+						.addComponent(rdbtnNewRadioButton)
+						.addComponent(rdbtnNewRadioButton_1))
 					.addGap(18)
 					.addComponent(betar)
 					.addGap(6)
@@ -192,4 +213,17 @@ public class ImparPar extends JFrame {
 	public void setOdd(Double odd) {
 		this.odd = odd;
 	}
+
+	public String getEscolha() {
+		return escolha;
+	}
+
+	public void setEscolha(String escolha) {
+		this.escolha = escolha;
+	}
+	
+	public void icone(){
+		this.setIconImage(new ImageIcon(getClass().getResource("../imagens/download.png")).getImage());
+	}
 }
+

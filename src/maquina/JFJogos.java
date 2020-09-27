@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -51,6 +52,7 @@ public class JFJogos extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		icone();
 		this.setNome(nome);
 		this.setCash(cash);
 		
@@ -171,5 +173,9 @@ public class JFJogos extends JFrame {
 
 	public void setCash(Double cash) {
 		this.cash = cash;
+	}
+	
+	public void icone(){
+		this.setIconImage(new ImageIcon(getClass().getResource("../imagens/download.png")).getImage());
 	}
 }

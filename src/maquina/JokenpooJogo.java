@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -55,6 +56,7 @@ public class JokenpooJogo extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		icone();
 		this.setNome(nome);
 		this.setCash(cash);
 		this.setEscolha(escolha);
@@ -253,5 +255,7 @@ public class JokenpooJogo extends JFrame {
 		this.resultado = resultado;
 	}
 
-	
+	public void icone(){
+		this.setIconImage(new ImageIcon(getClass().getResource("../imagens/download.png")).getImage());
+	}
 }
